@@ -1,0 +1,72 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+# Line length to match Google Python Style Guide
+line-length = 80
+
+# Exclude a variety of commonly ignored directories
+exclude = [".git", ".ruff_cache", "__pycache__", "build", "dist", "venv"]
+
+# Same as Black
+target-version = "py38"
+
+[tool.ruff.lint]
+# Enable flake8-docstrings (pydocstyle) and other linters
+select = [
+    "E",
+    "F",
+    "W",
+    "I",
+    "N",
+    "D",
+    "UP",
+    "B",
+    "A",
+    "C4",
+    "PT",
+    "RET",
+    "SIM",
+]
+ignore = [
+    # Google style guide uses one-line docstrings without a period
+    "D400",
+    "D415",
+    # Google style doesn't require docstrings in __init__
+    "D107",
+    # Line length handled by formatter
+    "E501",
+]
+
+# Allow autofix for all enabled rules (when `--fix`) is provided
+fixable = ["ALL"]
+unfixable = []
+
+# Allow unused variables when underscore-prefixed
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.mccabe]
+# Set maximum complexity allowed (Google style suggests simple functions)
+max-complexity = 10
+
+[tool.ruff.lint.pydocstyle]
+# Use Google-style docstrings
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+# Ignore imported names in __init__.py
+"__init__.py" = ["F401"]
+# Ignore some rules in tests
+"test_*.py" = ["D100", "D101", "D102", "D103"]
+
+[tool.ruff.lint.isort]
+# Google-style import groups
+known-first-party = ["multilsp"]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
